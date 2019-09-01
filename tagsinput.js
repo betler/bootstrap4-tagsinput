@@ -1,5 +1,5 @@
 /*
- * bootstrap-tagsinput v0.8.0
+ * betler/bootstrap-tagsinput v1.2.0
  * 
  */
 
@@ -10,6 +10,7 @@
     tagClass: function(item) {
       return 'badge badge-info';
     },
+    inputClass: '',
     focusClass: 'focus',
     itemValue: function(item) {
       return item ? item.toString() : item;
@@ -60,7 +61,7 @@
     }
 
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input type="text" ' + inputDatas + ' placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    this.$input = $('<input type="text" class="' + options.inputClass + '" ' + inputDatas + ' placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 

@@ -27,6 +27,7 @@ I will explain here only the modifications I make to the plugin. The rest are ex
 ### Options
 
 #### inputDataValues
+Allows to set data-xx attributes in the generated input.
 It needs an array of objects in the format:
 ```javascript
 [{data: 'data-attribute-name', value: 'attribute-value'}]
@@ -40,4 +41,20 @@ $('#inputFieldId').tagsinput({
 Will produce:
 ```html
 <input type="text" data-role="hidden-input" data-id="45" placeholder="">
+```
+
+#### inputClass
+Allows to set class attribute for the generated input.
+```javascript
+inputClass: 'form-control'
+```
+Example:
+```javascript
+$('#inputFieldId').tagsinput({
+   inputClass: 'form-control'
+});
+```
+Will produce:
+```html
+<input type="text" class="form-control" placeholder="">
 ```
