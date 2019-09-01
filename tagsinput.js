@@ -11,6 +11,7 @@
       return 'badge badge-info';
     },
     inputClass: '',
+    enclosingClass: 'bootstrap-tagsinput',
     focusClass: 'focus',
     itemValue: function(item) {
       return item ? item.toString() : item;
@@ -35,9 +36,10 @@
     trimValue: false,
     allowDuplicates: false,
     triggerChange: true,
-    inputDataValues: []
+    inputDataValues: [],
+    enclosingDataValues: []
   };
-
+  
   /**
    * Constructor function
    */
@@ -53,15 +55,25 @@
     this.objectItems = options && options.itemValue;
     this.placeholderText = element.hasAttribute('placeholder') ? this.$element.attr('placeholder') : '';
     this.inputSize = Math.max(1, this.placeholderText.length);
+
+    // #3: After #2 and #4 noticed that i wasn't reading a proper merge of options object
+    // This was made in build function, but it is needed here
+    this.options = $.extend({}, defaultOptions, options);
     
     let inputDatas = '';
-    for (let i = 0; i < options.inputDataValues.length; i++){
-    	let obj = options.inputDataValues[i];
+    for (let i = 0; i < this.options.inputDataValues.length; i++){
+    	let obj = this.options.inputDataValues[i];
     	inputDatas += 'data-' + obj.data + '="' + obj.value + '" ';
     }
 
-    this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input type="text" class="' + options.inputClass + '" ' + inputDatas + ' placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    let enclosingDatas = '';
+    for (let i = 0; i < this.options.enclosingDataValues.length; i++){
+    	let obj = this.options.enclosingDataValues[i];
+    	enclosingDatas += 'data-' + obj.data + '="' + obj.value + '" ';
+    }
+
+    this.$container = $('<div class="' + this.options.enclosingClass + '" ' + enclosingDatas + '></div>');
+    this.$input = $('<input type="text" class="' + this.options.inputClass + '" ' + inputDatas + ' placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 
@@ -293,7 +305,6 @@
     build: function(options) {
       var self = this;
 
-      self.options = $.extend({}, defaultOptions, options);
       // When itemValue is set, freeInput should always be false
       if (self.objectItems)
         self.options.freeInput = false;

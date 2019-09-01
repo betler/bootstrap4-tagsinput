@@ -32,6 +32,8 @@ It needs an array of objects in the format:
 ```javascript
 [{data: 'data-attribute-name', value: 'attribute-value'}]
 ```
+Default: []
+
 Example:
 ```javascript
 $('#inputFieldId').tagsinput({
@@ -43,11 +45,32 @@ Will produce:
 <input type="text" data-role="hidden-input" data-id="45" placeholder="">
 ```
 
+#### enclosingDataValues
+Allows to set data-xx attributes in the generated enclosing div.
+It needs an array of objects in the format:
+```javascript
+[{data: 'data-attribute-name', value: 'attribute-value'}]
+```
+Default: []
+
+Example:
+```javascript
+$('#inputFieldId').tagsinput({
+   enclosingDataValues: [{data: 'content', value: 'taginput'}, {data: 'id', value: 45}]
+});
+```
+Will produce:
+```html
+<div data-content="tagInput" data-id="45">
+```
+
 #### inputClass
 Allows to set class attribute for the generated input.
 ```javascript
 inputClass: 'form-control'
 ```
+Default: ''
+
 Example:
 ```javascript
 $('#inputFieldId').tagsinput({
@@ -57,4 +80,22 @@ $('#inputFieldId').tagsinput({
 Will produce:
 ```html
 <input type="text" class="form-control" placeholder="">
+```
+
+#### enclosingClass
+Allows to set class attribute for the generated enclosing div.
+```javascript
+enclosingClass: 'custom-class'
+```
+Default: 'bootstrap-tagsinput'
+
+Example:
+```javascript
+$('#inputFieldId').tagsinput({
+   enclosingClass: 'bootstrap-tagsinput custom-class'
+});
+```
+Will produce:
+```html
+<div class="bootstrap-tagsinput custom-class">
 ```
