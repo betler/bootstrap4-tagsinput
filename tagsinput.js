@@ -33,7 +33,8 @@
     },
     trimValue: false,
     allowDuplicates: false,
-    triggerChange: true
+    triggerChange: true,
+    inputDataValues: []
   };
 
   /**
@@ -51,9 +52,15 @@
     this.objectItems = options && options.itemValue;
     this.placeholderText = element.hasAttribute('placeholder') ? this.$element.attr('placeholder') : '';
     this.inputSize = Math.max(1, this.placeholderText.length);
+    
+    let inputDatas = '';
+    for (let i = 0; i < options.inputDataValues.length; i++){
+    	let obj = options.inputDataValues[i];
+    	inputDatas += 'data-' + obj.data + '="' + obj.value + '" ';
+    }
 
     this.$container = $('<div class="bootstrap-tagsinput"></div>');
-    this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+    this.$input = $('<input type="text" ' + inputDatas + ' placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
 
