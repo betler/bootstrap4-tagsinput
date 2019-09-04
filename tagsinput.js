@@ -1,8 +1,4 @@
-/*
- * betler/bootstrap-tagsinput v1.2.0
- * 
- */
-
+/*v1.3.0 betler/bootstrap4-tagsinput*/
 (function ($) {
   "use strict";
 
@@ -158,8 +154,17 @@
       // register item in internal array and map
       self.itemsArray.push(item);
 
+      let appliedTagClass;
+      if (beforeItemAddEvent.replaceClass) {
+        appliedTagClass = beforeItemAddEvent.replaceClass;
+      } else if (beforeItemAddEvent.addClass) {
+        appliedTagClass = tagClass + ' ' + beforeItemAddEvent.addClass;
+      } else {
+        appliedTagClass = tagClass;
+      }
+
       // add a tag element
-      var $tag = $('<span class="' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
+      var $tag = $('<span class="' + htmlEncode(appliedTagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
       $tag.data('item', item);
       self.findInputWrapper().before($tag);
 

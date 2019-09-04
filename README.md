@@ -99,3 +99,33 @@ Will produce:
 ```html
 <div class="bootstrap-tagsinput custom-class">
 ```
+
+### Events
+
+#### beforeItemAdd
+Event existed in the originally forked project. Original documentation:
+
+> Triggered just before an item gets added. Example:
+> ```javascript
+> $('input').on('beforeItemAdd', function(event) {
+>   // event.item: contains the item
+>   // event.cancel: set to true to prevent the item getting added
+> });
+> ```
+
+The modification made here is to allow the modification of the ```event``` object received in the function as a parameter with two properties to modify or replace the applied css classes to the item:
+
+- ```replaceClass```: text set here will replace the ```class``` attribute in the item added.
+- ```addClass```: text set here will be added after the existing ```class``` attribute in the item added.
+
+If both are set, ```replaceClass``` will take precedence.
+
+Example:
+```javascript
+$('input').on('beforeItemAdd', function(event) {
+   if (event.item > 100) {
+      event.replaceClass = 'badge badge-error';
+      // event.addClass = 'is-invalid';
+   }
+});
+```
